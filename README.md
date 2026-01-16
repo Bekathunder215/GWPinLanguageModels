@@ -25,6 +25,16 @@ The goal of the case study is **not to optimize model performance**, but to unde
 
 ---
 
+## Create a new environment for this project
+To create a new environment, in the project directory run:
+```bash
+conda env create -f env_requirements.yaml
+```
+To activate it:
+```bash
+conda activate slm-sustainability
+```
+
 ## General workflow
 
 1. Prepare the dataset  
