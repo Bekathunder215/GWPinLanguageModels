@@ -12,7 +12,7 @@ import argparse
 import os
 import pickle
 import time
-from dataclasses import asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import numpy as np
@@ -25,29 +25,31 @@ from codecarbon import OfflineEmissionsTracker
 
 from model import GPT, GPTConfig
 
-# @dataclass
-# class TrainingConfig:
-#    OUT_DIR: str
-#    DATA_DIR: str
-#    EVAL_INTERVAL: int
-#    EVAL_ITERS: int
-#    LOG_INTERVAL: int
-#    SAVE_CHECKPOINT: bool
-#    N_LAYER: int
-#    N_HEAD: int
-#    N_EMBD: int
-#    DROPOUT: float
-#    BIAS: bool
-#    SEED: int
-#    DEVICE: str
-#    DTYPE: str
-#    BATCH_SIZE: int
-#    BLOCK_SIZE: int
-#    MAX_ITERS: int
-#    LEARNING_RATE: float
-#    WEIGHT_DECAY: float
-#    GRAD_CLIP: float
-#    EMISSIONS_DIR: str
+
+@dataclass
+class TrainingConfig:
+    OUT_DIR: str
+    DATA_DIR: str
+    EVAL_INTERVAL: int
+    EVAL_ITERS: int
+    LOG_INTERVAL: int
+    SAVE_CHECKPOINT: bool
+    N_LAYER: int
+    N_HEAD: int
+    N_EMBD: int
+    DROPOUT: float
+    BIAS: bool
+    SEED: int
+    DEVICE: str
+    DTYPE: str
+    BATCH_SIZE: int
+    BLOCK_SIZE: int
+    MAX_ITERS: int
+    LEARNING_RATE: float
+    WEIGHT_DECAY: float
+    GRAD_CLIP: float
+    EMISSIONS_DIR: str
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -61,7 +63,7 @@ args = parser.parse_args()
 
 cfg_raw = yaml.safe_load(Path("configs/defaults.yaml").read_text())
 scenario = cfg_raw["scenarios"][args.exp]
-cfg = scenario
+cfg = TrainingConfig(**scenario)
 
 print(f"cofg is {cfg}")
 
