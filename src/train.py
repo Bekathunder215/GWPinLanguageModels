@@ -8,6 +8,7 @@ Focus:
 Source: https://github.com/karpathy/nanoGPT
 """
 
+import argparse
 import os
 import pickle
 import time
@@ -48,9 +49,18 @@ from model import GPT, GPTConfig
 #    GRAD_CLIP: float
 #    EMISSIONS_DIR: str
 
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--exp",
+    type=str,
+    default="",
+    help="experiment config file name (without .yaml)",
+)
+
+args = parser.parse_args()
 
 cfg_raw = yaml.safe_load(Path("configs/defaults.yaml").read_text())
-scenario = cfg_raw["scenarios"]["two"]
+scenario = cfg_raw["scenarios"][args.exp]
 cfg = scenario
 
 print(f"cofg is {cfg}")
