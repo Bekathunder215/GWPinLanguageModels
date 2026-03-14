@@ -11,7 +11,7 @@ Source: https://github.com/karpathy/nanoGPT
 import os
 import pickle
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
@@ -24,35 +24,34 @@ from codecarbon import OfflineEmissionsTracker
 
 from model import GPT, GPTConfig
 
-
-@dataclass
-class TrainingConfig:
-    OUT_DIR: str
-    DATA_DIR: str
-    EVAL_INTERVAL: int
-    EVAL_ITERS: int
-    LOG_INTERVAL: int
-    SAVE_CHECKPOINT: bool
-    N_LAYER: int
-    N_HEAD: int
-    N_EMBD: int
-    DROPOUT: float
-    BIAS: bool
-    SEED: int
-    DEVICE: str
-    DTYPE: str
-    BATCH_SIZE: int
-    BLOCK_SIZE: int
-    MAX_ITERS: int
-    LEARNING_RATE: float
-    WEIGHT_DECAY: float
-    GRAD_CLIP: float
-    EMISSIONS_DIR: str
+# @dataclass
+# class TrainingConfig:
+#    OUT_DIR: str
+#    DATA_DIR: str
+#    EVAL_INTERVAL: int
+#    EVAL_ITERS: int
+#    LOG_INTERVAL: int
+#    SAVE_CHECKPOINT: bool
+#    N_LAYER: int
+#    N_HEAD: int
+#    N_EMBD: int
+#    DROPOUT: float
+#    BIAS: bool
+#    SEED: int
+#    DEVICE: str
+#    DTYPE: str
+#    BATCH_SIZE: int
+#    BLOCK_SIZE: int
+#    MAX_ITERS: int
+#    LEARNING_RATE: float
+#    WEIGHT_DECAY: float
+#    GRAD_CLIP: float
+#    EMISSIONS_DIR: str
 
 
 cfg_raw = yaml.safe_load(Path("configs/defaults.yaml").read_text())
 scenario = cfg_raw["scenarios"]["two"]
-cfg = TrainingConfig(**scenario)
+cfg = scenario
 
 print(f"cofg is {cfg}")
 
@@ -106,8 +105,15 @@ def get_batch(split: str, data_dir: str, block_size: int, batch_size: int, devic
     data = np.memmap(bin_path, dtype=np.uint16, mode="r")
 
     ix = torch.randint(len(data) - block_size - 1, (batch_size,))
-    x = torch.stack([torch.from_numpy((data[i : i + block_size]).astype(np.int64)) for i in ix])
-    y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + block_size]).astype(np.int64)) for i in ix])
+    x = torch.stack(
+        [torch.from_numpy((data[i : i + block_size]).astype(np.int64)) for i in ix]
+    )
+    y = torch.stack(
+        [
+            torch.from_numpy((data[i + 1 : i + 1 + block_size]).astype(np.int64))
+            for i in ix
+        ]
+    )
 
     x = x.to(device)
     y = y.to(device)
