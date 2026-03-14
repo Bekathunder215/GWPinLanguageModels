@@ -106,15 +106,8 @@ def get_batch(split: str, data_dir: str, block_size: int, batch_size: int, devic
     data = np.memmap(bin_path, dtype=np.uint16, mode="r")
 
     ix = torch.randint(len(data) - block_size - 1, (batch_size,))
-    x = torch.stack(
-        [torch.from_numpy((data[i : i + block_size]).astype(np.int64)) for i in ix]
-    )
-    y = torch.stack(
-        [
-            torch.from_numpy((data[i + 1 : i + 1 + block_size]).astype(np.int64))
-            for i in ix
-        ]
-    )
+    x = torch.stack([torch.from_numpy((data[i : i + block_size]).astype(np.int64)) for i in ix])
+    y = torch.stack([torch.from_numpy((data[i + 1 : i + 1 + block_size]).astype(np.int64)) for i in ix])
 
     x = x.to(device)
     y = y.to(device)
