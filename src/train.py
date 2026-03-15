@@ -260,6 +260,20 @@ def main():
         if it % LOG_INTERVAL == 0:
             print(f"iter {it:5d} | loss {loss.item():.4f}", end="\n")
 
+    # Calculate Training Functional Unit Impact
+    total_tokens = MAX_ITERS * BATCH_SIZE * BLOCK_SIZE
+    # Assuming you pull 'emissions' from the tracker or the saved CSV
+    if total_tokens > 0:
+        # Emissions are usually in kg from CodeCarbon, let's convert to grams
+        total_emissions_g = tracker.final_emissions_data.emissions * 1000
+        emissions_per_m_tokens = (total_emissions_g / total_tokens) * 1_000_000
+
+        print("--- Sustainability Report ---")
+        print(f"Total Training Tokens: {total_tokens:,}")
+        print(
+            f"Functional Unit Impact: {emissions_per_m_tokens:.4f} gCO2e per 1M tokens"
+        )
+
     tracker.stop()
     print("Training completed.")
 

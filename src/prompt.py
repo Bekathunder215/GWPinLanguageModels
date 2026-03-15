@@ -19,7 +19,7 @@ OUT_DIR = "out"
 CKPT_PATH = os.path.join(OUT_DIR, "ckpt.pt")
 
 PROMPT = "To be, or not to be"
-MAX_NEW_TOKENS = 200
+MAX_NEW_TOKENS = 1000
 TEMPERATURE = 1.0
 TOP_K = 50
 
