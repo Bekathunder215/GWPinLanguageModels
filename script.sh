@@ -1,7 +1,6 @@
 #!/bin/bash
-#BSUB -R "rusage[mem=7GB] span[hosts=1]"
-#BSUB -gpu "num=1:mode=exclusive_process"
-#BSUB -q gpuv100
+#BSUB -R "rusage[mem=2GB] span[hosts=1]"
+#BSUB -q hpc
 #BSUB -W 10:00
 #BSUB -J slm
 #BSUB -n 4
