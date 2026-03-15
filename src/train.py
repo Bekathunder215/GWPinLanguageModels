@@ -17,6 +17,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+from tqdm.auto import tqdm
 
 # -----------------------------------------------------------------------------
 # Experiment configuration
@@ -219,14 +220,15 @@ def main():
     tracker.start()
 
     t0 = time.time()
-    for it in range(MAX_ITERS + 1):
+    pbar = tqdm(range(MAX_ITERS + 1), desc="Training", unit="iter")
+    for it in pbar:
         # periodic evaluation
         if it % EVAL_INTERVAL == 0:
             losses = estimate_loss(
                 model, DATA_DIR, BLOCK_SIZE, BATCH_SIZE, DEVICE, EVAL_ITERS
             )
             dt = time.time() - t0
-            print(
+            tqdm.write(
                 f"iter {it:5d} | train loss {losses['train']:.4f} | val loss {losses['val']:.4f} | elapsed {dt:.1f}s"
             )
             tracker.flush()
@@ -262,8 +264,10 @@ def main():
 
         optimizer.step()
 
+        pbar.set_postfix(loss=f"{loss.item():.4f}")
+
         if it % LOG_INTERVAL == 0:
-            print(f"iter {it:5d} | loss {loss.item():.4f}", end="\n")
+            tqdm.write(f"iter {it:5d} | loss {loss.item():.4f}")
 
     emissions_kg = tracker.stop()
     # Calculate Training Functional Unit Impact
