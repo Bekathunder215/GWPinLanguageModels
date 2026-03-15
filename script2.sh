@@ -5,8 +5,8 @@
 #BSUB -W 10:00
 #BSUB -J slm2
 #BSUB -n 4
-#BSUB -o main_%J.out
-#BSUB -e main_%J.err
+#BSUB -o hpcoutput/two_%J.out
+#BSUB -e hpcoutput/two_%J.err
 
 # InitializePythonenvironment
 source /dtu/projects/02613_2025/conda/conda_init.sh
