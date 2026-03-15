@@ -34,6 +34,7 @@ class TrainingConfig:
     EVAL_ITERS: int
     LOG_INTERVAL: int
     SAVE_CHECKPOINT: bool
+    SAVE_CHECKPOINT_NAME: str
     N_LAYER: int
     N_HEAD: int
     N_EMBD: int
@@ -74,6 +75,7 @@ EVAL_INTERVAL = cfg.EVAL_INTERVAL
 EVAL_ITERS = cfg.EVAL_ITERS
 LOG_INTERVAL = cfg.LOG_INTERVAL
 SAVE_CHECKPOINT = cfg.SAVE_CHECKPOINT
+SAVE_CHECKPOINT_NAME = cfg.SAVE_CHECKPOINT_NAME
 
 # Model (main tunables)
 N_LAYER = cfg.N_LAYER
@@ -156,6 +158,7 @@ def estimate_loss(
 
 def save_checkpoint(
     out_dir: str,
+    out_name: str,
     model: GPT,
     optimizer: torch.optim.Optimizer,
     iter_num: int,
@@ -168,7 +171,7 @@ def save_checkpoint(
         "optim_state": optimizer.state_dict(),
         "config": config,
     }
-    torch.save(ckpt, os.path.join(out_dir, "ckpt.pt"))
+    torch.save(ckpt, os.path.join(out_dir, out_name))
 
 
 def main():
@@ -243,7 +246,9 @@ def main():
                     },
                     "model": asdict(cfg),
                 }
-                save_checkpoint(OUT_DIR, model, optimizer, it, config_dump)
+                save_checkpoint(
+                    OUT_DIR, SAVE_CHECKPOINT_NAME, model, optimizer, it, config_dump
+                )
 
         # training step
         x, y = get_batch("train", DATA_DIR, BLOCK_SIZE, BATCH_SIZE, DEVICE)

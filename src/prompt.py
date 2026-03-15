@@ -10,6 +10,7 @@ import pickle
 
 import torch
 
+from helpers import training_to_gpt_config
 from model import GPT, GPTConfig
 
 # ----------------------------
@@ -19,8 +20,8 @@ OUT_DIR = "out"
 CKPT_PATH = os.path.join(OUT_DIR, "ckpt.pt")
 
 PROMPT = "To be, or not to be"
-MAX_NEW_TOKENS = 1000
-TEMPERATURE = 1.0
+MAX_NEW_TOKENS = 200
+TEMPERATURE = 0.1
 TOP_K = 50
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -39,6 +40,7 @@ def main():
     # train.py should store config with model parameters and data_dir
     data_dir = ckpt["config"]["data_dir"]
     model_cfg = ckpt["config"]["model"]
+    # print(model_cfg)
 
     meta = load_meta(data_dir)
     stoi = meta["stoi"]  # char to index mapping
@@ -51,7 +53,7 @@ def main():
     def decode(tokens):
         return "".join([itos[t] for t in tokens])
 
-    config = GPTConfig(**model_cfg)
+    config = GPTConfig(**training_to_gpt_config(model_cfg, 65))
     model = GPT(config).to(DEVICE)
     model.load_state_dict(ckpt["model_state"])
     model.eval()
@@ -62,7 +64,7 @@ def main():
         idx, max_new_tokens=MAX_NEW_TOKENS, temperature=TEMPERATURE, top_k=TOP_K
     )
 
-    # for i in rang)e(5):
+    # for i in range(5):
     #    print(
     #        f"Token: '{itos[out[0, i].item()]}' | Probability: {out[0, i].item():.4f}"
     #    )
