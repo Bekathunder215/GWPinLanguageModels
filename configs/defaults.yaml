@@ -1,6 +1,6 @@
 scenarios:
   one:
-    # I/O
+    # I/O this is 4096000 tokens
     OUT_DIR: "out"
     DATA_DIR: "data"
     EVAL_INTERVAL: 200
