@@ -1,0 +1,10 @@
+[codecarbon INFO @ 13:28:12] Codecarbon is taking the configuration from the local file /zhome/fd/2/219569/slms/.codecarbon.config
+[codecarbon INFO @ 13:28:12] offline tracker init
+[codecarbon INFO @ 13:28:12] Codecarbon is taking the configuration from the local file /zhome/fd/2/219569/slms/.codecarbon.config
+[codecarbon WARNING @ 13:28:12] Multiple instances of codecarbon are allowed to run at the same time.
+Traceback (most recent call last):
+  File "/zhome/fd/2/219569/slms/src/train.py", line 309, in <module>
+    main()
+  File "/zhome/fd/2/219569/slms/src/train.py", line 305, in main
+    save_checkpoint(OUT_DIR, model, optimizer, MAX_ITERS, config_dump)
+TypeError: save_checkpoint() missing 1 required positional argument: 'config'
