@@ -7,6 +7,7 @@ Source: https://github.com/karpathy/nanoGPT
 
 import os
 import pickle
+
 import torch
 
 from model import GPT, GPTConfig
@@ -40,8 +41,8 @@ def main():
     model_cfg = ckpt["config"]["model"]
 
     meta = load_meta(data_dir)
-    stoi = meta["stoi"]         # char to index mapping
-    itos = meta["itos"]         # index to char mapping
+    stoi = meta["stoi"]  # char to index mapping
+    itos = meta["itos"]  # index to char mapping
 
     def encode(s: str):
         # map unknown chars to a safe fallback if needed
@@ -58,12 +59,14 @@ def main():
     idx = torch.tensor([encode(PROMPT)], dtype=torch.long, device=DEVICE)
 
     out = model.generate(
-        idx,
-        max_new_tokens=MAX_NEW_TOKENS,
-        temperature=TEMPERATURE,
-        top_k=TOP_K
+        idx, max_new_tokens=MAX_NEW_TOKENS, temperature=TEMPERATURE, top_k=TOP_K
     )
 
+    # for i in rang)e(5):
+    #    print(
+    #        f"Token: '{itos[out[0, i].item()]}' | Probability: {out[0, i].item():.4f}"
+    #    )
+    print(f"tokens are: {len(out[0])}")
     print(decode(out[0].tolist()))
 
 

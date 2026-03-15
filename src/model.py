@@ -19,7 +19,7 @@ class GPTConfig:
     block_size: int = 256
     vocab_size: int = 50304
 
-    # model size (These are the main tunables you'll 
+    # model size (These are the main tunables you'll
     #             experiment with in the train.py)
     n_layer: int = 4
     n_head: int = 4
@@ -47,7 +47,9 @@ class CausalSelfAttention(nn.Module):
 
         # Causal mask (registered buffer so it moves with device)
         mask = torch.tril(torch.ones(config.block_size, config.block_size))
-        self.register_buffer("causal_mask", mask.view(1, 1, config.block_size, config.block_size))
+        self.register_buffer(
+            "causal_mask", mask.view(1, 1, config.block_size, config.block_size)
+        )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         B, T, C = x.size()
@@ -138,7 +140,9 @@ class GPT(nn.Module):
     def forward(self, idx: torch.Tensor, targets: torch.Tensor | None = None):
         B, T = idx.size()
         if T > self.config.block_size:
-            raise ValueError(f"Sequence length {T} exceeds block_size {self.config.block_size}")
+            raise ValueError(
+                f"Sequence length {T} exceeds block_size {self.config.block_size}"
+            )
 
         pos = torch.arange(0, T, device=idx.device, dtype=torch.long)  # (T,)
         x = self.wte(idx) + self.wpe(pos)  # (B, T, C)
