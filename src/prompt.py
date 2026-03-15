@@ -5,24 +5,39 @@ Students will integrate sustainability tracking themselves.
 Source: https://github.com/karpathy/nanoGPT
 """
 
+# ----------------------------
+# Edit these
+# ----------------------------
+import argparse
 import os
 import pickle
+from pathlib import Path
 
 import torch
+import yaml
 
 from helpers import training_to_gpt_config
 from model import GPT, GPTConfig
 
-# ----------------------------
-# Edit these
-# ----------------------------
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--exp",
+    type=str,
+    default="",
+    help="experiment config file name (without .yaml)",
+)
+args = parser.parse_args()
+cfg_raw = yaml.safe_load(Path("configs/defaults.yaml").read_text())
+scenario = cfg_raw["scenarios"][args.exp]
+
 OUT_DIR = "out"
-CKPT_PATH = os.path.join(OUT_DIR, "ckpt.pt")
+CKPT_PATH = os.path.join(OUT_DIR, scenario["SAVE_CHECKPOINT_NAME"])
+print(f"ckpt path is {Path(CKPT_PATH)}")
 
 PROMPT = "To be, or not to be"
-MAX_NEW_TOKENS = 200
+MAX_NEW_TOKENS = 700
 TEMPERATURE = 0.1
-TOP_K = 50
+TOP_K = 5
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 # ----------------------------
@@ -35,7 +50,7 @@ def load_meta(data_dir: str):
 
 
 def main():
-    ckpt = torch.load(CKPT_PATH, map_location=DEVICE)
+    ckpt = torch.load(str(CKPT_PATH), map_location=DEVICE)
 
     # train.py should store config with model parameters and data_dir
     data_dir = ckpt["config"]["data_dir"]
@@ -64,10 +79,10 @@ def main():
         idx, max_new_tokens=MAX_NEW_TOKENS, temperature=TEMPERATURE, top_k=TOP_K
     )
 
-    # for i in range(5):
-    #    print(
-    #        f"Token: '{itos[out[0, i].item()]}' | Probability: {out[0, i].item():.4f}"
-    #    )
+    for i in range(15):
+        print(
+            f"Token: '{itos[out[0, i].item()]}' | Probability: {out[0, i].item():.4f}"
+        )
     print(f"tokens are: {len(out[0])}")
     print(decode(out[0].tolist()))
 
