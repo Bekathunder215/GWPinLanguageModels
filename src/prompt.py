@@ -35,9 +35,9 @@ CKPT_PATH = os.path.join(OUT_DIR, scenario["SAVE_CHECKPOINT_NAME"])
 print(f"ckpt path is {Path(CKPT_PATH)}")
 
 PROMPT = "To be, or not to be"
-MAX_NEW_TOKENS = 700
+MAX_NEW_TOKENS = 200
 TEMPERATURE = 0.1
-TOP_K = 5
+TOP_K = 10
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 # ----------------------------
@@ -72,6 +72,8 @@ def main():
     model = GPT(config).to(DEVICE)
     model.load_state_dict(ckpt["model_state"])
     model.eval()
+    print(model)
+    print(model.get_num_params())
 
     idx = torch.tensor([encode(PROMPT)], dtype=torch.long, device=DEVICE)
 
