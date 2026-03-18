@@ -17,12 +17,12 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from tqdm.auto import tqdm
 
 # -----------------------------------------------------------------------------
 # Experiment configuration
 import yaml
 from codecarbon import OfflineEmissionsTracker
+from tqdm.auto import tqdm
 
 from model import GPT, GPTConfig
 
@@ -306,7 +306,9 @@ def main():
             },
             "model": asdict(cfg),
         }
-        save_checkpoint(OUT_DIR, model, optimizer, MAX_ITERS, config_dump)
+        save_checkpoint(
+            OUT_DIR, SAVE_CHECKPOINT_NAME, model, optimizer, MAX_ITERS, config_dump
+        )
 
 
 if __name__ == "__main__":
