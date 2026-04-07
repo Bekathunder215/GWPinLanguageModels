@@ -1,3 +1,7 @@
+# 3000 epochs as FU
+# batch size and contextxt lenght part of FU
+# hpc DTU part of FU
+
 scenarios:
   one:
     # I/O this is 4096000 tokens
@@ -19,11 +23,11 @@ scenarios:
 
     # Training (main parameters you can also experiment with)
     SEED: 1
-    DEVICE: "cpu" # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
+    DEVICE: "cuda" # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
     DTYPE: "float32"
-    BATCH_SIZE: 32 # Number of sequences processed in parallel.
+    BATCH_SIZE: 64 # Number of sequences processed in parallel.
     BLOCK_SIZE: 256 # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
-    MAX_ITERS: 500 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
+    MAX_ITERS: 3000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
     LEARNING_RATE: 3e-4 # the standard starting learning rate, often good enough for a first try
     WEIGHT_DECAY: 0.1 # L2 Regularization
     GRAD_CLIP: 1.0 # To prevent exploding gradients
@@ -49,9 +53,9 @@ scenarios:
     SEED: 1
     DEVICE: "cuda" # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
     DTYPE: "float32"
-    BATCH_SIZE: 128 # Number of sequences processed in parallel.
+    BATCH_SIZE: 64 # Number of sequences processed in parallel.
     BLOCK_SIZE: 256 # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
-    MAX_ITERS: 5000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
+    MAX_ITERS: 3000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
     LEARNING_RATE: 2e-4 # the standard starting learning rate, often good enough for a first try
     WEIGHT_DECAY: 0.1 # L2 Regularization
     GRAD_CLIP: 1.0 # To prevent exploding gradients
@@ -69,7 +73,7 @@ scenarios:
     # Model (main tunables)
     N_LAYER: 4
     N_HEAD: 4
-    N_EMBD: 64
+    N_EMBD: 256
     DROPOUT: 0.2
     BIAS: True
 
@@ -77,9 +81,9 @@ scenarios:
     SEED: 1
     DEVICE: "cuda" # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
     DTYPE: "float32"
-    BATCH_SIZE: 16 # Number of sequences processed in parallel.
-    BLOCK_SIZE: 32 # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
-    MAX_ITERS: 5000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
+    BATCH_SIZE: 64 # Number of sequences processed in parallel.
+    BLOCK_SIZE: 256 # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
+    MAX_ITERS: 3000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
     LEARNING_RATE: 2e-4 # the standard starting learning rate, often good enough for a first try
-    WEIGHT_DECAY: 0.1 # L2 Regularization
+    WEIGHT_DECAY: 0.2 # L2 Regularization
     GRAD_CLIP: 1.0 # To prevent exploding gradients

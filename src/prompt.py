@@ -36,7 +36,7 @@ print(f"ckpt path is {Path(CKPT_PATH)}")
 
 PROMPT = "To be, or not to be"
 MAX_NEW_TOKENS = 200
-TEMPERATURE = 0.1
+TEMPERATURE = 0.5
 TOP_K = 10
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
