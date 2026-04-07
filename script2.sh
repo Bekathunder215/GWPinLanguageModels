@@ -2,7 +2,7 @@
 #BSUB -R "rusage[mem=7GB] span[hosts=1]"
 #BSUB -gpu "num=1:mode=exclusive_process"
 #BSUB -q gpuv100
-#BSUB -W 30:00
+#BSUB -W 20:00
 #BSUB -J slm2
 #BSUB -n 4
 #BSUB -o hpcoutput/two_%J.out

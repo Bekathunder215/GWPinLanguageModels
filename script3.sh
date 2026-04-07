@@ -2,7 +2,7 @@
 #BSUB -R "rusage[mem=9GB] span[hosts=1]"
 #BSUB -gpu "num=1:mode=exclusive_process"
 #BSUB -q gpuv100
-#BSUB -W 30:00
+#BSUB -W 20:00
 #BSUB -J slm3
 #BSUB -n 4
 #BSUB -u s250379@student.dtu.dk
