@@ -1,0 +1,86 @@
+cofg is TrainingConfig(OUT_DIR='out', DATA_DIR='data', EVAL_INTERVAL=200, EVAL_ITERS=50, LOG_INTERVAL=50, SAVE_CHECKPOINT=True, SAVE_CHECKPOINT_NAME='three.pt', N_LAYER=4, N_HEAD=4, N_EMBD=256, DROPOUT=0.2, BIAS=True, SEED=1, DEVICE='cuda', DTYPE='float32', BATCH_SIZE=64, BLOCK_SIZE=256, MAX_ITERS=3000, LEARNING_RATE='2e-4', WEIGHT_DECAY=0.2, GRAD_CLIP=1.0, EMISSIONS_DIR='three')
+{'vocab_size': 65, 'itos': {0: '\n', 1: ' ', 2: '!', 3: '$', 4: '&', 5: "'", 6: ',', 7: '-', 8: '.', 9: '3', 10: ':', 11: ';', 12: '?', 13: 'A', 14: 'B', 15: 'C', 16: 'D', 17: 'E', 18: 'F', 19: 'G', 20: 'H', 21: 'I', 22: 'J', 23: 'K', 24: 'L', 25: 'M', 26: 'N', 27: 'O', 28: 'P', 29: 'Q', 30: 'R', 31: 'S', 32: 'T', 33: 'U', 34: 'V', 35: 'W', 36: 'X', 37: 'Y', 38: 'Z', 39: 'a', 40: 'b', 41: 'c', 42: 'd', 43: 'e', 44: 'f', 45: 'g', 46: 'h', 47: 'i', 48: 'j', 49: 'k', 50: 'l', 51: 'm', 52: 'n', 53: 'o', 54: 'p', 55: 'q', 56: 'r', 57: 's', 58: 't', 59: 'u', 60: 'v', 61: 'w', 62: 'x', 63: 'y', 64: 'z'}, 'stoi': {'\n': 0, ' ': 1, '!': 2, '$': 3, '&': 4, "'": 5, ',': 6, '-': 7, '.': 8, '3': 9, ':': 10, ';': 11, '?': 12, 'A': 13, 'B': 14, 'C': 15, 'D': 16, 'E': 17, 'F': 18, 'G': 19, 'H': 20, 'I': 21, 'J': 22, 'K': 23, 'L': 24, 'M': 25, 'N': 26, 'O': 27, 'P': 28, 'Q': 29, 'R': 30, 'S': 31, 'T': 32, 'U': 33, 'V': 34, 'W': 35, 'X': 36, 'Y': 37, 'Z': 38, 'a': 39, 'b': 40, 'c': 41, 'd': 42, 'e': 43, 'f': 44, 'g': 45, 'h': 46, 'i': 47, 'j': 48, 'k': 49, 'l': 50, 'm': 51, 'n': 52, 'o': 53, 'p': 54, 'q': 55, 'r': 56, 's': 57, 't': 58, 'u': 59, 'v': 60, 'w': 61, 'x': 62, 'y': 63, 'z': 64}, 'train_fraction': 0.9, 'dataset': 'tiny_shakespeare_char', 'source_url': 'https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt'}
+iter     0 | train loss 4.1723 | val loss 4.1702 | elapsed 9.7s
+iter     0 | loss 4.1899
+iter    50 | loss 2.6416
+iter   100 | loss 2.5432
+iter   150 | loss 2.4986
+iter   200 | train loss 2.4415 | val loss 2.4560 | elapsed 26.7s
+iter   200 | loss 2.4689
+iter   250 | loss 2.4550
+iter   300 | loss 2.4410
+iter   350 | loss 2.4099
+iter   400 | train loss 2.3458 | val loss 2.3741 | elapsed 39.4s
+iter   400 | loss 2.3952
+iter   450 | loss 2.3743
+iter   500 | loss 2.3446
+iter   550 | loss 2.3258
+iter   600 | train loss 2.1851 | val loss 2.2334 | elapsed 52.2s
+iter   600 | loss 2.2761
+iter   650 | loss 2.2321
+iter   700 | loss 2.2354
+iter   750 | loss 2.1877
+iter   800 | train loss 2.0510 | val loss 2.1232 | elapsed 65.2s
+iter   800 | loss 2.1618
+iter   850 | loss 2.1520
+iter   900 | loss 2.0974
+iter   950 | loss 2.0934
+iter  1000 | train loss 1.9365 | val loss 2.0421 | elapsed 79.1s
+iter  1000 | loss 2.0547
+iter  1050 | loss 2.0336
+iter  1100 | loss 2.0203
+iter  1150 | loss 1.9768
+iter  1200 | train loss 1.8419 | val loss 1.9807 | elapsed 92.8s
+iter  1200 | loss 1.9726
+iter  1250 | loss 1.9517
+iter  1300 | loss 1.9467
+iter  1350 | loss 1.9286
+iter  1400 | train loss 1.7712 | val loss 1.9176 | elapsed 105.7s
+iter  1400 | loss 1.9149
+iter  1450 | loss 1.8716
+iter  1500 | loss 1.8610
+iter  1550 | loss 1.8899
+iter  1600 | train loss 1.7152 | val loss 1.8704 | elapsed 119.2s
+iter  1600 | loss 1.8444
+iter  1650 | loss 1.8224
+iter  1700 | loss 1.8212
+iter  1750 | loss 1.8105
+iter  1800 | train loss 1.6673 | val loss 1.8378 | elapsed 133.0s
+iter  1800 | loss 1.8183
+iter  1850 | loss 1.7832
+iter  1900 | loss 1.7620
+iter  1950 | loss 1.7784
+iter  2000 | train loss 1.6208 | val loss 1.8054 | elapsed 146.4s
+iter  2000 | loss 1.7534
+iter  2050 | loss 1.7625
+iter  2100 | loss 1.7725
+iter  2150 | loss 1.7509
+iter  2200 | train loss 1.5862 | val loss 1.7708 | elapsed 160.3s
+iter  2200 | loss 1.6983
+iter  2250 | loss 1.7019
+iter  2300 | loss 1.7101
+iter  2350 | loss 1.6686
+iter  2400 | train loss 1.5527 | val loss 1.7426 | elapsed 174.7s
+iter  2400 | loss 1.6899
+iter  2450 | loss 1.6523
+iter  2500 | loss 1.6920
+iter  2550 | loss 1.6658
+iter  2600 | train loss 1.5321 | val loss 1.7202 | elapsed 190.0s
+iter  2600 | loss 1.7184
+iter  2650 | loss 1.6569
+iter  2700 | loss 1.6597
+iter  2750 | loss 1.6295
+iter  2800 | train loss 1.5080 | val loss 1.6980 | elapsed 202.9s
+iter  2800 | loss 1.6558
+iter  2850 | loss 1.6363
+iter  2900 | loss 1.6121
+iter  2950 | loss 1.6069
+iter  3000 | train loss 1.4814 | val loss 1.6760 | elapsed 215.6s
+iter  3000 | loss 1.6274
+
+--- Sustainability Functional Unit Report ---
+Scenario: three
+Total Tokens Processed: 49,152,000
+Total Emissions: 1.6558 gCO2e
+Functional Unit Impact: 0.0337 gCO2e per 1M tokens
+Training completed.
