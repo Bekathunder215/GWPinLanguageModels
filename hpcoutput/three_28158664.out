@@ -5,90 +5,97 @@ iter     0 | loss 4.1899
 iter    50 | loss 2.6416
 iter   100 | loss 2.5432
 iter   150 | loss 2.4986
-iter   200 | train loss 2.4415 | val loss 2.4560 | elapsed 14.4s
+iter   200 | train loss 2.4415 | val loss 2.4560 | elapsed 14.7s
 iter   200 | loss 2.4689
 iter   250 | loss 2.4550
 iter   300 | loss 2.4410
 iter   350 | loss 2.4099
-iter   400 | train loss 2.3458 | val loss 2.3741 | elapsed 26.9s
+iter   400 | train loss 2.3458 | val loss 2.3741 | elapsed 27.2s
 iter   400 | loss 2.3952
 iter   450 | loss 2.3743
 iter   500 | loss 2.3446
 iter   550 | loss 2.3258
-iter   600 | train loss 2.1851 | val loss 2.2334 | elapsed 39.3s
+iter   600 | train loss 2.1851 | val loss 2.2334 | elapsed 39.6s
 iter   600 | loss 2.2761
 iter   650 | loss 2.2321
 iter   700 | loss 2.2354
 iter   750 | loss 2.1877
-iter   800 | train loss 2.0510 | val loss 2.1232 | elapsed 51.8s
+iter   800 | train loss 2.0510 | val loss 2.1232 | elapsed 52.1s
 iter   800 | loss 2.1618
 iter   850 | loss 2.1520
 iter   900 | loss 2.0974
 iter   950 | loss 2.0934
-iter  1000 | train loss 1.9365 | val loss 2.0421 | elapsed 64.4s
+iter  1000 | train loss 1.9365 | val loss 2.0421 | elapsed 64.6s
 iter  1000 | loss 2.0547
 iter  1050 | loss 2.0336
 iter  1100 | loss 2.0203
 iter  1150 | loss 1.9768
-iter  1200 | train loss 1.8419 | val loss 1.9807 | elapsed 76.9s
+iter  1200 | train loss 1.8419 | val loss 1.9807 | elapsed 77.1s
 iter  1200 | loss 1.9726
 iter  1250 | loss 1.9517
 iter  1300 | loss 1.9467
 iter  1350 | loss 1.9286
-iter  1400 | train loss 1.7712 | val loss 1.9176 | elapsed 89.4s
+iter  1400 | train loss 1.7712 | val loss 1.9176 | elapsed 89.6s
 iter  1400 | loss 1.9149
 iter  1450 | loss 1.8716
 iter  1500 | loss 1.8610
 iter  1550 | loss 1.8899
-iter  1600 | train loss 1.7152 | val loss 1.8704 | elapsed 102.1s
+iter  1600 | train loss 1.7152 | val loss 1.8704 | elapsed 102.4s
 iter  1600 | loss 1.8444
 iter  1650 | loss 1.8224
 iter  1700 | loss 1.8212
 iter  1750 | loss 1.8105
-iter  1800 | train loss 1.6673 | val loss 1.8378 | elapsed 115.0s
+iter  1800 | train loss 1.6673 | val loss 1.8378 | elapsed 115.1s
 iter  1800 | loss 1.8183
 iter  1850 | loss 1.7832
 iter  1900 | loss 1.7620
 iter  1950 | loss 1.7784
-iter  2000 | train loss 1.6208 | val loss 1.8054 | elapsed 127.7s
+iter  2000 | train loss 1.6208 | val loss 1.8054 | elapsed 127.6s
 iter  2000 | loss 1.7534
 iter  2050 | loss 1.7625
 iter  2100 | loss 1.7725
 iter  2150 | loss 1.7509
-iter  2200 | train loss 1.5862 | val loss 1.7708 | elapsed 140.2s
+iter  2200 | train loss 1.5862 | val loss 1.7708 | elapsed 140.1s
 iter  2200 | loss 1.6983
 iter  2250 | loss 1.7019
 iter  2300 | loss 1.7101
 iter  2350 | loss 1.6686
-iter  2400 | train loss 1.5527 | val loss 1.7426 | elapsed 152.7s
+iter  2400 | train loss 1.5527 | val loss 1.7426 | elapsed 152.6s
 iter  2400 | loss 1.6899
 iter  2450 | loss 1.6523
 iter  2500 | loss 1.6920
 iter  2550 | loss 1.6658
-iter  2600 | train loss 1.5321 | val loss 1.7202 | elapsed 165.2s
+iter  2600 | train loss 1.5321 | val loss 1.7202 | elapsed 165.1s
 iter  2600 | loss 1.7184
 iter  2650 | loss 1.6569
 iter  2700 | loss 1.6597
 iter  2750 | loss 1.6295
-iter  2800 | train loss 1.5080 | val loss 1.6980 | elapsed 177.8s
+iter  2800 | train loss 1.5080 | val loss 1.6980 | elapsed 177.6s
 iter  2800 | loss 1.6558
 iter  2850 | loss 1.6363
 iter  2900 | loss 1.6121
 iter  2950 | loss 1.6069
-iter  3000 | train loss 1.4814 | val loss 1.6760 | elapsed 190.3s
+iter  3000 | train loss 1.4814 | val loss 1.6760 | elapsed 190.1s
 iter  3000 | loss 1.6274
+
+--- Sustainability Functional Unit Report ---
+Scenario: three
+Total Tokens Processed: 49,152,000
+Total Emissions: 1.5254 gCO2e
+Functional Unit Impact: 0.0310 gCO2e per 1M tokens
+Training completed.
 
 ------------------------------------------------------------
 Sender: LSF System <lsfadmin@hpc.dtu.dk>
-Subject: Job 28158615: <slm3> in cluster <dcc> Exited
+Subject: Job 28158664: <slm3> in cluster <dcc> Done
 
-Job <slm3> was submitted from host <n-62-27-19> by user <s250379> in cluster <dcc> at Tue Apr  7 21:39:38 2026
-Job was executed on host(s) <4*n-62-11-16>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue Apr  7 21:48:46 2026
+Job <slm3> was submitted from host <n-62-27-19> by user <s250379> in cluster <dcc> at Tue Apr  7 22:01:50 2026
+Job was executed on host(s) <4*n-62-11-16>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue Apr  7 22:34:07 2026
 </zhome/fd/2/219569> was used as the home directory.
 </zhome/fd/2/219569/slms> was used as the working directory.
-Started at Tue Apr  7 21:48:46 2026
-Terminated at Tue Apr  7 21:52:04 2026
-Results reported at Tue Apr  7 21:52:04 2026
+Started at Tue Apr  7 22:34:07 2026
+Terminated at Tue Apr  7 22:37:25 2026
+Results reported at Tue Apr  7 22:37:25 2026
 
 Your job looked like:
 
@@ -114,20 +121,20 @@ python src/train.py --exp three
 
 ------------------------------------------------------------
 
-Exited with exit code 1.
+Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   193.00 sec.
-    Max Memory :                                 843 MB
-    Average Memory :                             842.50 MB
+    CPU time :                                   201.00 sec.
+    Max Memory :                                 853 MB
+    Average Memory :                             852.33 MB
     Total Requested Memory :                     12288.00 MB
-    Delta Memory :                               11445.00 MB
+    Delta Memory :                               11435.00 MB
     Max Swap :                                   -
     Max Processes :                              4
-    Max Threads :                                11
+    Max Threads :                                13
     Run time :                                   198 sec.
-    Turnaround time :                            746 sec.
+    Turnaround time :                            2135 sec.
 
 The output (if any) is above this job summary.
 
@@ -135,5 +142,5 @@ The output (if any) is above this job summary.
 
 PS:
 
-Read file <hpcoutput/three_28158615.err> for stderr output of this job.
+Read file <hpcoutput/three_28158664.err> for stderr output of this job.
 
