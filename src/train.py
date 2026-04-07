@@ -181,10 +181,11 @@ def main():
     tracker = OfflineEmissionsTracker(
         output_dir=Path(f"./data/{cfg.EMISSIONS_DIR}/"),
         output_file="emissions.csv",
-        measure_power_secs=10,
+        measure_power_secs=1,
         save_to_file=True,
         cloud_provider="gcp",
         cloud_region="europe-west1",
+        on_csv_write="append"
     )
 
     meta = load_meta(DATA_DIR)
@@ -231,7 +232,7 @@ def main():
             tqdm.write(
                 f"iter {it:5d} | train loss {losses['train']:.4f} | val loss {losses['val']:.4f} | elapsed {dt:.1f}s"
             )
-            tracker.flush()
+            # tracker.flush()
 
             if SAVE_CHECKPOINT and it > 0:
                 config_dump = {
