@@ -1,89 +1,339 @@
-# 3000 epochs as FU
-# batch size and contextxt lenght part of FU
-# hpc DTU part of FU
+# Training FU: one complete training run of the SLM on Tiny Shakespeare,
+# 3000 gradient update steps, batch size 64, block size 256, DTU HPC, Denmark grid.
+#
+# Prompting FU: generation of 200 characters from a fixed seed prompt,
+# using the Scenario 1 baseline checkpoint, DTU HPC, Denmark grid.
+#
+# Baseline: 4 layers, 4 heads, 128 embedding, dropout 0.1, lr 3e-4
+#
+# Scenario 1 — N_LAYER sweep:  1, 2, [4], 6, 8   (N_HEAD=4, N_EMBD=128 fixed)
+# Scenario 2 — N_HEAD sweep:   1, 2, [4], 8       (N_LAYER=4, N_EMBD=128 fixed)
+# Scenario 3 — N_EMBD sweep:   64, [128], 256, 512 (N_LAYER=4, N_HEAD=4 fixed)
+# Values in brackets [] are the baseline — reuse data/one/emissions.csv and one.pt
 
 scenarios:
-  one:
-    # I/O this is 4096000 tokens
+
+  # --- BASELINE (shared reference point across all three scenarios) ---
+  baseline:
     OUT_DIR: "out"
     DATA_DIR: "data"
     EVAL_INTERVAL: 200
     EVAL_ITERS: 50
     LOG_INTERVAL: 50
     SAVE_CHECKPOINT: True
-    SAVE_CHECKPOINT_NAME: "one.pt"
-    EMISSIONS_DIR: "one"
-
-    # Model (main tunables)
+    SAVE_CHECKPOINT_NAME: "baseline.pt"
+    EMISSIONS_DIR: "baseline"
     N_LAYER: 4
     N_HEAD: 4
     N_EMBD: 128
     DROPOUT: 0.1
     BIAS: True
-
-    # Training (main parameters you can also experiment with)
     SEED: 1
-    DEVICE: "cuda" # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
+    DEVICE: "cuda"
     DTYPE: "float32"
-    BATCH_SIZE: 64 # Number of sequences processed in parallel.
-    BLOCK_SIZE: 256 # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
-    MAX_ITERS: 3000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
-    LEARNING_RATE: 3e-4 # the standard starting learning rate, often good enough for a first try
-    WEIGHT_DECAY: 0.1 # L2 Regularization
-    GRAD_CLIP: 1.0 # To prevent exploding gradients
-  two:
-    # I/O
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  # --- SCENARIO 1: N_LAYER sweep ---
+  s1_l1:
     OUT_DIR: "out"
     DATA_DIR: "data"
     EVAL_INTERVAL: 200
     EVAL_ITERS: 50
     LOG_INTERVAL: 50
     SAVE_CHECKPOINT: True
-    SAVE_CHECKPOINT_NAME: "two.pt"
-    EMISSIONS_DIR: "two"
+    SAVE_CHECKPOINT_NAME: "s1_l1.pt"
+    EMISSIONS_DIR: "s1_l1"
+    N_LAYER: 1
+    N_HEAD: 4
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
 
-    # Model (main tunables)
+  s1_l2:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s1_l2.pt"
+    EMISSIONS_DIR: "s1_l2"
+    N_LAYER: 2
+    N_HEAD: 4
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  # s1_l4 = baseline, skip re-running
+
+  s1_l6:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s1_l6.pt"
+    EMISSIONS_DIR: "s1_l6"
+    N_LAYER: 6
+    N_HEAD: 4
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  s1_l8:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s1_l8.pt"
+    EMISSIONS_DIR: "s1_l8"
     N_LAYER: 8
+    N_HEAD: 4
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  # --- SCENARIO 2: N_HEAD sweep ---
+  s2_h1:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s2_h1.pt"
+    EMISSIONS_DIR: "s2_h1"
+    N_LAYER: 4
+    N_HEAD: 1
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  s2_h2:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s2_h2.pt"
+    EMISSIONS_DIR: "s2_h2"
+    N_LAYER: 4
+    N_HEAD: 2
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  # s2_h4 = baseline, skip re-running
+
+  s2_h8:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s2_h8.pt"
+    EMISSIONS_DIR: "s2_h8"
+    N_LAYER: 4
     N_HEAD: 8
     N_EMBD: 128
-    DROPOUT: 0.2
+    DROPOUT: 0.1
     BIAS: True
-
-    # Training (main parameters you can also experiment with)
     SEED: 1
-    DEVICE: "cuda" # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
+    DEVICE: "cuda"
     DTYPE: "float32"
-    BATCH_SIZE: 64 # Number of sequences processed in parallel.
-    BLOCK_SIZE: 256 # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
-    MAX_ITERS: 3000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
-    LEARNING_RATE: 2e-4 # the standard starting learning rate, often good enough for a first try
-    WEIGHT_DECAY: 0.1 # L2 Regularization
-    GRAD_CLIP: 1.0 # To prevent exploding gradients
-  three:
-    # I/O
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  # --- SCENARIO 3: N_EMBD sweep ---
+  s3_e64:
     OUT_DIR: "out"
     DATA_DIR: "data"
     EVAL_INTERVAL: 200
     EVAL_ITERS: 50
     LOG_INTERVAL: 50
     SAVE_CHECKPOINT: True
-    SAVE_CHECKPOINT_NAME: "three.pt"
-    EMISSIONS_DIR: "three"
+    SAVE_CHECKPOINT_NAME: "s3_e64.pt"
+    EMISSIONS_DIR: "s3_e64"
+    N_LAYER: 4
+    N_HEAD: 4
+    N_EMBD: 64
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
 
-    # Model (main tunables)
+  # s3_e128 = baseline, skip re-running
+
+  s3_e256:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s3_e256.pt"
+    EMISSIONS_DIR: "s3_e256"
     N_LAYER: 4
     N_HEAD: 4
     N_EMBD: 256
-    DROPOUT: 0.2
+    DROPOUT: 0.1
     BIAS: True
-
-    # Training (main parameters you can also experiment with)
     SEED: 1
-    DEVICE: "cuda" # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
+    DEVICE: "cuda"
     DTYPE: "float32"
-    BATCH_SIZE: 64 # Number of sequences processed in parallel.
-    BLOCK_SIZE: 256 # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
-    MAX_ITERS: 3000 # Total number of training iterations. The more iterations, the better the model can perform, but it also takes more time and energy to train.
-    LEARNING_RATE: 2e-4 # the standard starting learning rate, often good enough for a first try
-    WEIGHT_DECAY: 0.2 # L2 Regularization
-    GRAD_CLIP: 1.0 # To prevent exploding gradients
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  s3_e512:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s3_e512.pt"
+    EMISSIONS_DIR: "s3_e512"
+    N_LAYER: 4
+    N_HEAD: 4
+    N_EMBD: 512
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+# Prompting scenarios — Scenario 4: output length variation, Scenario 5: temperature variation
+# All use the baseline checkpoint (baseline.pt). Baseline point for both = four_mid / five_mid.
+prompting_scenarios:
+  four_short:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 50
+    TEMPERATURE: 0.5
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_four_short"
+
+  four_mid:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 200
+    TEMPERATURE: 0.5
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_four_mid"
+
+  four_long:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 400
+    TEMPERATURE: 0.5
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_four_long"
+
+  five_low:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 200
+    TEMPERATURE: 0.1
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_five_low"
+
+  five_mid:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 200
+    TEMPERATURE: 0.5
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_five_mid"
+
+  five_high:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 200
+    TEMPERATURE: 1.5
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_five_high"

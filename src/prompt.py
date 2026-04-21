@@ -1,13 +1,10 @@
 """
 Inference / prompting script (Tiny Shakespeare, char-level).
-Students will integrate sustainability tracking themselves.
 
-Source: https://github.com/karpathy/nanoGPT
+Prompting FU: generation of 200 characters from a fixed seed prompt,
+using the Scenario 1 checkpoint, on fixed hardware in Denmark.
 """
 
-# ----------------------------
-# Edit these
-# ----------------------------
 import argparse
 import os
 import pickle
@@ -15,6 +12,7 @@ from pathlib import Path
 
 import torch
 import yaml
+from codecarbon import OfflineEmissionsTracker
 
 from helpers import training_to_gpt_config
 from model import GPT, GPTConfig
@@ -23,24 +21,23 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--exp",
     type=str,
-    default="",
-    help="experiment config file name (without .yaml)",
+    required=True,
+    help="prompting scenario name (e.g. four_short, five_mid)",
 )
 args = parser.parse_args()
+
 cfg_raw = yaml.safe_load(Path("configs/defaults.yaml").read_text())
-scenario = cfg_raw["scenarios"][args.exp]
+scenario = cfg_raw["prompting_scenarios"][args.exp]
 
 OUT_DIR = "out"
-CKPT_PATH = os.path.join(OUT_DIR, scenario["SAVE_CHECKPOINT_NAME"])
-print(f"ckpt path is {Path(CKPT_PATH)}")
-
-PROMPT = "To be, or not to be"
-MAX_NEW_TOKENS = 200
-TEMPERATURE = 0.5
-TOP_K = 10
+CKPT_PATH = os.path.join(OUT_DIR, scenario["CHECKPOINT_NAME"])
+PROMPT = scenario["PROMPT"]
+MAX_NEW_TOKENS = scenario["MAX_NEW_TOKENS"]
+TEMPERATURE = scenario["TEMPERATURE"]
+TOP_K = scenario["TOP_K"]
+EMISSIONS_DIR = scenario["EMISSIONS_DIR"]
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-# ----------------------------
 
 
 def load_meta(data_dir: str):
@@ -52,17 +49,14 @@ def load_meta(data_dir: str):
 def main():
     ckpt = torch.load(str(CKPT_PATH), map_location=DEVICE)
 
-    # train.py should store config with model parameters and data_dir
     data_dir = ckpt["config"]["data_dir"]
     model_cfg = ckpt["config"]["model"]
-    # print(model_cfg)
 
     meta = load_meta(data_dir)
-    stoi = meta["stoi"]  # char to index mapping
-    itos = meta["itos"]  # index to char mapping
+    stoi = meta["stoi"]
+    itos = meta["itos"]
 
     def encode(s: str):
-        # map unknown chars to a safe fallback if needed
         return [stoi.get(ch, stoi[" "]) for ch in s]
 
     def decode(tokens):
@@ -72,21 +66,36 @@ def main():
     model = GPT(config).to(DEVICE)
     model.load_state_dict(ckpt["model_state"])
     model.eval()
-    print(model)
-    print(model.get_num_params())
 
     idx = torch.tensor([encode(PROMPT)], dtype=torch.long, device=DEVICE)
 
+    tracker = OfflineEmissionsTracker(
+        output_dir=Path(f"./data/{EMISSIONS_DIR}/"),
+        output_file="emissions.csv",
+        measure_power_secs=1,
+        save_to_file=True,
+        cloud_provider="gcp",
+        cloud_region="europe-west1",
+        on_csv_write="append",
+    )
+
+    tracker.start()
     out = model.generate(
         idx, max_new_tokens=MAX_NEW_TOKENS, temperature=TEMPERATURE, top_k=TOP_K
     )
+    emissions_kg = tracker.stop()
 
-    for i in range(15):
-        print(
-            f"Token: '{itos[out[0, i].item()]}' | Probability: {out[0, i].item():.4f}"
-        )
-    print(f"tokens are: {len(out[0])}")
+    generated_text = decode(out[0].tolist())
+    generated_chars = len(generated_text) - len(PROMPT)
+
     print(decode(out[0].tolist()))
+
+    total_emissions_g = emissions_kg * 1000
+    print("\n--- Prompting Functional Unit Report ---")
+    print(f"Scenario: {args.exp}")
+    print(f"Model: {scenario['CHECKPOINT_NAME']} | Temp: {TEMPERATURE} | Max tokens: {MAX_NEW_TOKENS}")
+    print(f"Characters generated: {generated_chars}")
+    print(f"Total Emissions: {total_emissions_g:.6f} gCO2eq")
 
 
 if __name__ == "__main__":

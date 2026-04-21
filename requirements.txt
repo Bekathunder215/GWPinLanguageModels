@@ -1,18 +1,10 @@
-# Core
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch
+torchvision
+torchaudio
 numpy
 pandas
 matplotlib
 tqdm
-
-# PyTorch (CPU version)
-torch
-torchvision
-torchaudio
-
-# Notebooks
-ipykernel
-jupyterlab
-
-# Utilities
 requests
 codecarbon

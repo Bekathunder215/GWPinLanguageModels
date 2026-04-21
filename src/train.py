@@ -271,23 +271,12 @@ def main():
             tqdm.write(f"iter {it:5d} | loss {loss.item():.4f}")
 
     emissions_kg = tracker.stop()
-    # Calculate Training Functional Unit Impact
-    total_tokens = MAX_ITERS * BATCH_SIZE * BLOCK_SIZE
     total_emissions_g = emissions_kg * 1000
 
-    total_tokens = MAX_ITERS * BATCH_SIZE * BLOCK_SIZE
-
-    if total_tokens > 0:
-        # Calculating the Functional Unit: gCO2e per 1M tokens
-        emissions_per_m_tokens = (total_emissions_g / total_tokens) * 1_000_000
-
-        print("\n--- Sustainability Functional Unit Report ---")
-        print(f"Scenario: {args.exp}")
-        print(f"Total Tokens Processed: {total_tokens:,}")
-        print(f"Total Emissions: {total_emissions_g:.4f} gCO2e")
-        print(
-            f"Functional Unit Impact: {emissions_per_m_tokens:.4f} gCO2e per 1M tokens"
-        )
+    print("\n--- Training Functional Unit Report ---")
+    print(f"Scenario: {args.exp}")
+    print(f"Iterations: {MAX_ITERS} | Batch: {BATCH_SIZE} | Block: {BLOCK_SIZE}")
+    print(f"Total Emissions: {total_emissions_g:.4f} gCO2eq per training run")
 
     print("Training completed.")
 

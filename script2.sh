@@ -9,9 +9,10 @@
 #BSUB -e hpcoutput/two_%J.err
 
 # InitializePythonenvironment
-source /dtu/projects/02613_2025/conda/conda_init.sh
-conda deactivate
 
-conda activate ~/my_env
+
+
+source ~/.local/bin/env
+source ~/GWPinLanguageModels/.venv/bin/activate
 
 python src/train.py --exp two

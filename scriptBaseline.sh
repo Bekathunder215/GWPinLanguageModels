@@ -3,16 +3,14 @@
 #BSUB -gpu "num=1:mode=exclusive_process"
 #BSUB -q gpuv100
 #BSUB -W 8:00
-#BSUB -J slm3
+#BSUB -J baseline
 #BSUB -n 4
-#BSUB -o hpcoutput/three_%J.out
-#BSUB -e hpcoutput/three_%J.err
-
-# InitializePythonenvironment
+#BSUB -o hpcoutput/baseline_%J.out
+#BSUB -e hpcoutput/baseline_%J.err
 
 
 
 source ~/.local/bin/env
 source ~/GWPinLanguageModels/.venv/bin/activate
 
-python src/train.py --exp three
+python src/train.py --exp baseline
