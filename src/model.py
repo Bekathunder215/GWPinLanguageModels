@@ -7,6 +7,7 @@ Source: https://github.com/karpathy/nanoGPT
 
 import math
 from dataclasses import dataclass
+from typing import Optional
 
 import torch
 import torch.nn as nn
@@ -137,7 +138,7 @@ class GPT(nn.Module):
     def get_num_params(self) -> int:
         return sum(p.numel() for p in self.parameters())
 
-    def forward(self, idx: torch.Tensor, targets: torch.Tensor | None = None):
+    def forward(self, idx: torch.Tensor, targets: Optional[torch.Tensor] = None):
         B, T = idx.size()
         if T > self.config.block_size:
             raise ValueError(
