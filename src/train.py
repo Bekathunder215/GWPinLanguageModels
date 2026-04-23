@@ -87,9 +87,8 @@ BIAS = cfg.BIAS
 
 # Training (main parameters you can also experiment with)
 SEED = cfg.SEED
-DEVICE = torch.device(
-    cfg.DEVICE
-)  # If you can, try also seeing consumption when using gpu (change this to 'cuda' if torch.cuda.is_available() else 'cpu')
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {DEVICE}")
 DTYPE = cfg.DTYPE
 BATCH_SIZE = cfg.BATCH_SIZE  # Number of sequences processed in parallel.
 BLOCK_SIZE = cfg.BLOCK_SIZE  # Maximum context length for predictions (e.g. 128 or 256). The longer the block size, the more memory and compute it requires, but it can also lead to better performance.
@@ -177,6 +176,7 @@ def save_checkpoint(
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
+    os.makedirs(f"./data/{cfg.EMISSIONS_DIR}/", exist_ok=True)
     set_seed(SEED)
     tracker = OfflineEmissionsTracker(
         output_dir=Path(f"./data/{cfg.EMISSIONS_DIR}/"),

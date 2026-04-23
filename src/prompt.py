@@ -69,6 +69,7 @@ def main():
 
     idx = torch.tensor([encode(PROMPT)], dtype=torch.long, device=DEVICE)
 
+    os.makedirs(f"./data/{EMISSIONS_DIR}/", exist_ok=True)
     tracker = OfflineEmissionsTracker(
         output_dir=Path(f"./data/{EMISSIONS_DIR}/"),
         output_file="emissions.csv",

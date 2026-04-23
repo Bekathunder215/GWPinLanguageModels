@@ -167,7 +167,7 @@ class GPT(nn.Module):
         idx: torch.Tensor,
         max_new_tokens: int,
         temperature: float = 1.0,
-        top_k: int | None = None,
+        top_k: Optional[int] = None,
     ) -> torch.Tensor:
         self.eval()
         for _ in range(max_new_tokens):

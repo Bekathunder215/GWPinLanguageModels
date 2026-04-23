@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "WebFetch(domain:www.hpc.dtu.dk)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(nvidia-smi)",
+      "Bash(\"/c/Windows/System32/nvidia-smi.exe\")",
+      "Bash(cmd.exe /c \"nvidia-smi\")",
+      "Bash(cmd.exe *)",
+      "Bash(python -c ' *)",
+      "Bash(sed -i 's|python src/train.py|cd src \\\\&\\\\& python train.py|g' script*.sh)",
+      "Bash(sed -i 's|python src/prompt.py|cd src \\\\&\\\\& python prompt.py|g' script*.sh)",
+      "Bash(sed -i 's|cd src && python train.py|PYTHONPATH=src python src/train.py|g' script*.sh)",
+      "Bash(sed -i 's|cd src && python prompt.py|PYTHONPATH=src python src/prompt.py|g' script*.sh)"
+    ]
+  }
+}
