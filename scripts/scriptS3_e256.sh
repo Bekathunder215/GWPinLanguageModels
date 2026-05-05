@@ -10,7 +10,10 @@
 
 
 
-source ~/.local/bin/env
-source ~/GWPinLanguageModels/.venv/bin/activate
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
 
 PYTHONPATH=src python src/train.py --exp s3_e256

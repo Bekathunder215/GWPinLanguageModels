@@ -136,6 +136,30 @@ scenarios:
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
 
+  s1_l64:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s1_l64.pt"
+    EMISSIONS_DIR: "s1_l64"
+    N_LAYER: 64
+    N_HEAD: 4
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
   # --- SCENARIO 2: N_HEAD sweep ---
   s2_h2:
     OUT_DIR: "out"
@@ -222,6 +246,30 @@ scenarios:
     EMISSIONS_DIR: "s2_h32"
     N_LAYER: 4
     N_HEAD: 32
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+    s2_h64:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s2_h64.pt"
+    EMISSIONS_DIR: "s2_h64"
+    N_LAYER: 4
+    N_HEAD: 64
     N_EMBD: 128
     DROPOUT: 0.1
     BIAS: True
@@ -337,6 +385,31 @@ scenarios:
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
 
+  s3_e1024:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s3_e1024.pt"
+    EMISSIONS_DIR: "s3_e1024"
+    N_LAYER: 4
+    N_HEAD: 4
+    N_EMBD: 1024
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+
 # Prompting scenarios — Scenario 4: output length variation, Scenario 5: temperature variation
 # All use the baseline checkpoint (baseline.pt). Baseline point for both = four_mid / five_mid.
 prompting_scenarios:
@@ -348,10 +421,26 @@ prompting_scenarios:
     TOP_K: 10
     EMISSIONS_DIR: "prompt_four_short"
 
+  four_mid_low:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 100
+    TEMPERATURE: 0.5
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_four_mid"
+
   four_mid:
     CHECKPOINT_NAME: "baseline.pt"
     PROMPT: "To be, or not to be"
     MAX_NEW_TOKENS: 200
+    TEMPERATURE: 0.5
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_four_mid"
+
+  four_mid_high:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 300
     TEMPERATURE: 0.5
     TOP_K: 10
     EMISSIONS_DIR: "prompt_four_mid"
@@ -372,6 +461,14 @@ prompting_scenarios:
     TOP_K: 10
     EMISSIONS_DIR: "prompt_five_low"
 
+  five_mid_low:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 200
+    TEMPERATURE: 0.3
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_five_low"
+
   five_mid:
     CHECKPOINT_NAME: "baseline.pt"
     PROMPT: "To be, or not to be"
@@ -380,10 +477,18 @@ prompting_scenarios:
     TOP_K: 10
     EMISSIONS_DIR: "prompt_five_mid"
 
+  five_mid_high:
+    CHECKPOINT_NAME: "baseline.pt"
+    PROMPT: "To be, or not to be"
+    MAX_NEW_TOKENS: 200
+    TEMPERATURE: 0.75
+    TOP_K: 10
+    EMISSIONS_DIR: "prompt_five_mid"
+
   five_high:
     CHECKPOINT_NAME: "baseline.pt"
     PROMPT: "To be, or not to be"
     MAX_NEW_TOKENS: 200
-    TEMPERATURE: 1.5
+    TEMPERATURE: 1.0
     TOP_K: 10
     EMISSIONS_DIR: "prompt_five_high"

@@ -1,0 +1,10 @@
+bsub < scriptPrompt4short.sh
+bsub < scriptPrompt4mid_low.sh
+bsub < scriptPrompt4mid.sh
+bsub < scriptPrompt4mid_high.sh
+bsub < scriptPrompt4long.sh
+bsub < scriptPrompt5low.sh
+bsub < scriptPrompt5mid_low.sh
+bsub < scriptPrompt5mid.sh
+bsub < scriptPrompt5mid_high.sh
+bsub < scriptPrompt5high.sh

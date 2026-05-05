@@ -2,11 +2,11 @@
 #BSUB -R "rusage[mem=3GB] span[hosts=1]"
 #BSUB -gpu "num=1:mode=exclusive_process"
 #BSUB -q gpuv100
-#BSUB -W 00:10
-#BSUB -J s3_e32
+#BSUB -W 00:15
+#BSUB -J s1_l64
 #BSUB -n 4
-#BSUB -o hpcoutput/s3_e32_%J.out
-#BSUB -e hpcoutput/s3_e32_%J.err
+#BSUB -o hpcoutput/s1_l64_%J.out
+#BSUB -e hpcoutput/s1_l64_%J.err
 
 
 
@@ -16,4 +16,4 @@ conda deactivate
 conda activate ~/my_env
 
 
-python src/train.py --exp s3_e32
+python src/train.py --exp s1_l64

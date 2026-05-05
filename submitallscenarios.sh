@@ -6,7 +6,9 @@ bsub < scriptS2_h2.sh
 bsub < scriptS2_h8.sh
 bsub < scriptS2_h16.sh
 bsub < scriptS2_h32.sh
+bsub < scriptS2_h64.sh
 bsub < scriptS3_e32.sh
 bsub < scriptS3_e64.sh
 bsub < scriptS3_e256.sh
 bsub < scriptS3_e512.sh
+bsub < scriptS3_e1024.sh
