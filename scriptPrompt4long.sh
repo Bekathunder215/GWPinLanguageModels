@@ -10,8 +10,9 @@
 
 
 
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
 
-source ~/.local/bin/env
-source ~/GWPinLanguageModels/.venv/bin/activate
+conda activate ~/my_env
 
 python src/prompt.py --exp four_long
