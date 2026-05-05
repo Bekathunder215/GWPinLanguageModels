@@ -12,7 +12,6 @@
 # Values in brackets [] are the baseline — reuse data/one/emissions.csv and one.pt
 
 scenarios:
-
   # --- BASELINE (shared reference point across all three scenarios) ---
   baseline:
     OUT_DIR: "out"
@@ -39,30 +38,6 @@ scenarios:
     GRAD_CLIP: 1.0
 
   # --- SCENARIO 1: N_LAYER sweep ---
-  s1_l1:
-    OUT_DIR: "out"
-    DATA_DIR: "data"
-    EVAL_INTERVAL: 200
-    EVAL_ITERS: 50
-    LOG_INTERVAL: 50
-    SAVE_CHECKPOINT: True
-    SAVE_CHECKPOINT_NAME: "s1_l1.pt"
-    EMISSIONS_DIR: "s1_l1"
-    N_LAYER: 1
-    N_HEAD: 4
-    N_EMBD: 128
-    DROPOUT: 0.1
-    BIAS: True
-    SEED: 1
-    DEVICE: "cuda"
-    DTYPE: "float32"
-    BATCH_SIZE: 64
-    BLOCK_SIZE: 256
-    MAX_ITERS: 3000
-    LEARNING_RATE: 3e-4
-    WEIGHT_DECAY: 0.1
-    GRAD_CLIP: 1.0
-
   s1_l2:
     OUT_DIR: "out"
     DATA_DIR: "data"
@@ -89,30 +64,6 @@ scenarios:
 
   # s1_l4 = baseline, skip re-running
 
-  s1_l6:
-    OUT_DIR: "out"
-    DATA_DIR: "data"
-    EVAL_INTERVAL: 200
-    EVAL_ITERS: 50
-    LOG_INTERVAL: 50
-    SAVE_CHECKPOINT: True
-    SAVE_CHECKPOINT_NAME: "s1_l6.pt"
-    EMISSIONS_DIR: "s1_l6"
-    N_LAYER: 6
-    N_HEAD: 4
-    N_EMBD: 128
-    DROPOUT: 0.1
-    BIAS: True
-    SEED: 1
-    DEVICE: "cuda"
-    DTYPE: "float32"
-    BATCH_SIZE: 64
-    BLOCK_SIZE: 256
-    MAX_ITERS: 3000
-    LEARNING_RATE: 3e-4
-    WEIGHT_DECAY: 0.1
-    GRAD_CLIP: 1.0
-
   s1_l8:
     OUT_DIR: "out"
     DATA_DIR: "data"
@@ -137,18 +88,17 @@ scenarios:
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
 
-  # --- SCENARIO 2: N_HEAD sweep ---
-  s2_h1:
+  s1_l16:
     OUT_DIR: "out"
     DATA_DIR: "data"
     EVAL_INTERVAL: 200
     EVAL_ITERS: 50
     LOG_INTERVAL: 50
     SAVE_CHECKPOINT: True
-    SAVE_CHECKPOINT_NAME: "s2_h1.pt"
-    EMISSIONS_DIR: "s2_h1"
-    N_LAYER: 4
-    N_HEAD: 1
+    SAVE_CHECKPOINT_NAME: "s1_l16.pt"
+    EMISSIONS_DIR: "s1_l16"
+    N_LAYER: 16
+    N_HEAD: 4
     N_EMBD: 128
     DROPOUT: 0.1
     BIAS: True
@@ -162,6 +112,31 @@ scenarios:
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
 
+  s1_l32:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s1_l32.pt"
+    EMISSIONS_DIR: "s1_l32"
+    N_LAYER: 32
+    N_HEAD: 4
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+  # --- SCENARIO 2: N_HEAD sweep ---
   s2_h2:
     OUT_DIR: "out"
     DATA_DIR: "data"
@@ -212,7 +187,82 @@ scenarios:
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
 
+  s2_h16:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s2_h16.pt"
+    EMISSIONS_DIR: "s2_h16"
+    N_LAYER: 4
+    N_HEAD: 16
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+    s2_h32:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s2_h32.pt"
+    EMISSIONS_DIR: "s2_h32"
+    N_LAYER: 4
+    N_HEAD: 32
+    N_EMBD: 128
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+
   # --- SCENARIO 3: N_EMBD sweep ---
+
+  s3_e32:
+    OUT_DIR: "out"
+    DATA_DIR: "data"
+    EVAL_INTERVAL: 200
+    EVAL_ITERS: 50
+    LOG_INTERVAL: 50
+    SAVE_CHECKPOINT: True
+    SAVE_CHECKPOINT_NAME: "s3_e32.pt"
+    EMISSIONS_DIR: "s3_e32"
+    N_LAYER: 4
+    N_HEAD: 4
+    N_EMBD: 32
+    DROPOUT: 0.1
+    BIAS: True
+    SEED: 1
+    DEVICE: "cuda"
+    DTYPE: "float32"
+    BATCH_SIZE: 64
+    BLOCK_SIZE: 256
+    MAX_ITERS: 3000
+    LEARNING_RATE: 3e-4
+    WEIGHT_DECAY: 0.1
+    GRAD_CLIP: 1.0
+
+
   s3_e64:
     OUT_DIR: "out"
     DATA_DIR: "data"
