@@ -1,5 +1,5 @@
 bsub < scriptPrompt4short.sh
-bsub < scriptPrompt4mid_low.sh
+bsub < scriptPrompt4mid_short.sh
 bsub < scriptPrompt4mid.sh
 bsub < scriptPrompt4mid_high.sh
 bsub < scriptPrompt4long.sh
