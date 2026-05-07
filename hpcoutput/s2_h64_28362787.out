@@ -1,0 +1,63 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28362787: <s2_h64> in cluster <dcc> Exited
+
+Job <s2_h64> was submitted from host <n-62-30-8> by user <s250379> in cluster <dcc> at Tue May  5 20:42:41 2026
+Job was executed on host(s) <4*n-62-20-6>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue May  5 21:01:42 2026
+</zhome/fd/2/219569> was used as the home directory.
+</zhome/fd/2/219569/slms> was used as the working directory.
+Started at Tue May  5 21:01:42 2026
+Terminated at Tue May  5 21:01:49 2026
+Results reported at Tue May  5 21:01:49 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -R "rusage[mem=3GB] span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -q gpuv100
+#BSUB -W 00:15
+#BSUB -J s2_h64
+#BSUB -n 4
+#BSUB -o hpcoutput/s2_h64_%J.out
+#BSUB -e hpcoutput/s2_h64_%J.err
+
+
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
+# source ~/.local/bin/env
+# source ~/GWPinLanguageModels/.venv/bin/activate
+
+python src/train.py --exp s2_h64
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   3.19 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     12288.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   7 sec.
+    Turnaround time :                            1148 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <hpcoutput/s2_h64_28362787.err> for stderr output of this job.
+

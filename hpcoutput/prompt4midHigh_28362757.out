@@ -1,0 +1,75 @@
+To be, or not to be the come the see to me
+And the can the was this do should shall and them,
+That the with the content the tell of to thee,
+And hear the shall shall that fight the for the self
+To shall me shall the shall soul as the see to prover
+The be their pating of the seed seem of to my sealf,
+And he have the da
+
+--- Prompting Functional Unit Report ---
+Scenario: four_mid_high
+Model: baseline.pt | Temp: 0.5 | Max tokens: 300
+Characters generated: 300
+Total Emissions: 0.002740 gCO2eq
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28362757: <prompt4midHigh> in cluster <dcc> Done
+
+Job <prompt4midHigh> was submitted from host <n-62-30-8> by user <s250379> in cluster <dcc> at Tue May  5 20:42:28 2026
+Job was executed on host(s) <4*n-62-11-16>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue May  5 20:46:05 2026
+</zhome/fd/2/219569> was used as the home directory.
+</zhome/fd/2/219569/slms> was used as the working directory.
+Started at Tue May  5 20:46:05 2026
+Terminated at Tue May  5 20:46:12 2026
+Results reported at Tue May  5 20:46:12 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -R "rusage[mem=3GB] span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -q gpuv100
+#BSUB -W 1:00
+#BSUB -J prompt4midHigh
+#BSUB -n 4
+#BSUB -o hpcoutput/prompt4midHigh_%J.out
+#BSUB -e hpcoutput/prompt4midHigh_%J.err
+
+
+
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
+python src/prompt.py --exp four_mid_high
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   4.38 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     12288.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   7 sec.
+    Turnaround time :                            224 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <hpcoutput/prompt4midHigh_28362757.err> for stderr output of this job.
+

@@ -1,0 +1,6 @@
+Loaded module: cuda/11.8
+Traceback (most recent call last):
+  File "/zhome/fd/2/219569/slms/src/train.py", line 67, in <module>
+    scenario = cfg_raw["scenarios"][args.exp]
+               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 's2_h64'

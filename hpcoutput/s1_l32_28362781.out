@@ -1,0 +1,148 @@
+cofg is TrainingConfig(OUT_DIR='out', DATA_DIR='data', EVAL_INTERVAL=200, EVAL_ITERS=50, LOG_INTERVAL=50, SAVE_CHECKPOINT=True, SAVE_CHECKPOINT_NAME='s1_l32.pt', N_LAYER=32, N_HEAD=4, N_EMBD=128, DROPOUT=0.1, BIAS=True, SEED=1, DEVICE='cuda', DTYPE='float32', BATCH_SIZE=64, BLOCK_SIZE=256, MAX_ITERS=3000, LEARNING_RATE='3e-4', WEIGHT_DECAY=0.1, GRAD_CLIP=1.0, EMISSIONS_DIR='s1_l32')
+Using device: cuda
+{'vocab_size': 65, 'itos': {0: '\n', 1: ' ', 2: '!', 3: '$', 4: '&', 5: "'", 6: ',', 7: '-', 8: '.', 9: '3', 10: ':', 11: ';', 12: '?', 13: 'A', 14: 'B', 15: 'C', 16: 'D', 17: 'E', 18: 'F', 19: 'G', 20: 'H', 21: 'I', 22: 'J', 23: 'K', 24: 'L', 25: 'M', 26: 'N', 27: 'O', 28: 'P', 29: 'Q', 30: 'R', 31: 'S', 32: 'T', 33: 'U', 34: 'V', 35: 'W', 36: 'X', 37: 'Y', 38: 'Z', 39: 'a', 40: 'b', 41: 'c', 42: 'd', 43: 'e', 44: 'f', 45: 'g', 46: 'h', 47: 'i', 48: 'j', 49: 'k', 50: 'l', 51: 'm', 52: 'n', 53: 'o', 54: 'p', 55: 'q', 56: 'r', 57: 's', 58: 't', 59: 'u', 60: 'v', 61: 'w', 62: 'x', 63: 'y', 64: 'z'}, 'stoi': {'\n': 0, ' ': 1, '!': 2, '$': 3, '&': 4, "'": 5, ',': 6, '-': 7, '.': 8, '3': 9, ':': 10, ';': 11, '?': 12, 'A': 13, 'B': 14, 'C': 15, 'D': 16, 'E': 17, 'F': 18, 'G': 19, 'H': 20, 'I': 21, 'J': 22, 'K': 23, 'L': 24, 'M': 25, 'N': 26, 'O': 27, 'P': 28, 'Q': 29, 'R': 30, 'S': 31, 'T': 32, 'U': 33, 'V': 34, 'W': 35, 'X': 36, 'Y': 37, 'Z': 38, 'a': 39, 'b': 40, 'c': 41, 'd': 42, 'e': 43, 'f': 44, 'g': 45, 'h': 46, 'i': 47, 'j': 48, 'k': 49, 'l': 50, 'm': 51, 'n': 52, 'o': 53, 'p': 54, 'q': 55, 'r': 56, 's': 57, 't': 58, 'u': 59, 'v': 60, 'w': 61, 'x': 62, 'y': 63, 'z': 64}, 'train_fraction': 0.9, 'dataset': 'tiny_shakespeare_char', 'source_url': 'https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt'}
+iter     0 | train loss 4.2068 | val loss 4.2070 | elapsed 7.2s
+iter     0 | loss 4.2050
+iter    50 | loss 2.8937
+iter   100 | loss 2.6204
+iter   150 | loss 2.5445
+iter   200 | train loss 2.4848 | val loss 2.4872 | elapsed 56.2s
+iter   200 | loss 2.5146
+iter   250 | loss 2.4799
+iter   300 | loss 2.4178
+iter   350 | loss 2.3686
+iter   400 | train loss 2.3101 | val loss 2.3232 | elapsed 106.1s
+iter   400 | loss 2.3426
+iter   450 | loss 2.3261
+iter   500 | loss 2.2801
+iter   550 | loss 2.2336
+iter   600 | train loss 2.1564 | val loss 2.1910 | elapsed 155.8s
+iter   600 | loss 2.2126
+iter   650 | loss 2.1486
+iter   700 | loss 2.1366
+iter   750 | loss 2.0744
+iter   800 | train loss 1.9728 | val loss 2.0480 | elapsed 205.6s
+iter   800 | loss 2.0586
+iter   850 | loss 1.9882
+iter   900 | loss 1.9562
+iter   950 | loss 1.9311
+iter  1000 | train loss 1.8169 | val loss 1.9409 | elapsed 255.4s
+iter  1000 | loss 1.8746
+iter  1050 | loss 1.8452
+iter  1100 | loss 1.8171
+iter  1150 | loss 1.7882
+iter  1200 | train loss 1.6895 | val loss 1.8323 | elapsed 305.2s
+iter  1200 | loss 1.7239
+iter  1250 | loss 1.7500
+iter  1300 | loss 1.7236
+iter  1350 | loss 1.6572
+iter  1400 | train loss 1.6031 | val loss 1.7822 | elapsed 355.1s
+iter  1400 | loss 1.6447
+iter  1450 | loss 1.6619
+iter  1500 | loss 1.6333
+iter  1550 | loss 1.6068
+iter  1600 | train loss 1.5331 | val loss 1.7129 | elapsed 405.0s
+iter  1600 | loss 1.6088
+iter  1650 | loss 1.5585
+iter  1700 | loss 1.5671
+iter  1750 | loss 1.5332
+iter  1800 | train loss 1.4836 | val loss 1.6736 | elapsed 454.9s
+iter  1800 | loss 1.5554
+iter  1850 | loss 1.5335
+iter  1900 | loss 1.5551
+iter  1950 | loss 1.4967
+iter  2000 | train loss 1.4415 | val loss 1.6371 | elapsed 504.8s
+iter  2000 | loss 1.5095
+iter  2050 | loss 1.4746
+iter  2100 | loss 1.4972
+iter  2150 | loss 1.4459
+iter  2200 | train loss 1.3958 | val loss 1.6077 | elapsed 554.6s
+iter  2200 | loss 1.4634
+iter  2250 | loss 1.4655
+iter  2300 | loss 1.4010
+iter  2350 | loss 1.4739
+iter  2400 | train loss 1.3683 | val loss 1.5745 | elapsed 604.5s
+iter  2400 | loss 1.4342
+iter  2450 | loss 1.4409
+iter  2500 | loss 1.4145
+iter  2550 | loss 1.4077
+iter  2600 | train loss 1.3417 | val loss 1.5568 | elapsed 654.3s
+iter  2600 | loss 1.3888
+iter  2650 | loss 1.3596
+iter  2700 | loss 1.4031
+iter  2750 | loss 1.3799
+iter  2800 | train loss 1.3171 | val loss 1.5519 | elapsed 704.8s
+iter  2800 | loss 1.3794
+iter  2850 | loss 1.3687
+iter  2900 | loss 1.3643
+iter  2950 | loss 1.3932
+iter  3000 | train loss 1.2923 | val loss 1.5293 | elapsed 754.6s
+iter  3000 | loss 1.3416
+
+--- Training Functional Unit Report ---
+Scenario: s1_l32
+Iterations: 3000 | Batch: 64 | Block: 256
+Total Emissions: 6.7135 gCO2eq per training run
+Training completed.
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28362781: <s1_l32> in cluster <dcc> Done
+
+Job <s1_l32> was submitted from host <n-62-30-8> by user <s250379> in cluster <dcc> at Tue May  5 20:42:40 2026
+Job was executed on host(s) <4*n-62-20-11>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue May  5 20:49:06 2026
+</zhome/fd/2/219569> was used as the home directory.
+</zhome/fd/2/219569/slms> was used as the working directory.
+Started at Tue May  5 20:49:06 2026
+Terminated at Tue May  5 21:01:52 2026
+Results reported at Tue May  5 21:01:52 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -R "rusage[mem=3GB] span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -q gpuv100
+#BSUB -W 00:15
+#BSUB -J s1_l32
+#BSUB -n 4
+#BSUB -o hpcoutput/s1_l32_%J.out
+#BSUB -e hpcoutput/s1_l32_%J.err
+
+
+
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
+
+python src/train.py --exp s1_l32
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   896.00 sec.
+    Max Memory :                                 860 MB
+    Average Memory :                             828.29 MB
+    Total Requested Memory :                     12288.00 MB
+    Delta Memory :                               11428.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                13
+    Run time :                                   766 sec.
+    Turnaround time :                            1152 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <hpcoutput/s1_l32_28362781.err> for stderr output of this job.
+

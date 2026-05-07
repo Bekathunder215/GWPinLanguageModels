@@ -1,0 +1,85 @@
+To be, or not to be me of you are man.
+
+CAPULET:
+That must will to shall be the death.
+
+BRUTUS:
+My lord, my lord of suffer that shall distand.
+
+CORIOLANUS:
+I mean so, I may are to my lord,
+And for the shall of the stand with the firends,
+The brother the say than fair, my soul:
+I will be your hart this poower.
+
+BENVOLIO:
+No, will be the came of the death,
+What in the shall she father that the brother thou seall
+Is th
+
+--- Prompting Functional Unit Report ---
+Scenario: four_long
+Model: baseline.pt | Temp: 0.5 | Max tokens: 400
+Characters generated: 400
+Total Emissions: 0.002609 gCO2eq
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28362191: <prompt4long> in cluster <dcc> Done
+
+Job <prompt4long> was submitted from host <n-62-27-19> by user <s250379> in cluster <dcc> at Tue May  5 19:07:09 2026
+Job was executed on host(s) <4*n-62-20-4>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue May  5 19:36:39 2026
+</zhome/fd/2/219569> was used as the home directory.
+</zhome/fd/2/219569/slms> was used as the working directory.
+Started at Tue May  5 19:36:39 2026
+Terminated at Tue May  5 19:36:47 2026
+Results reported at Tue May  5 19:36:47 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -R "rusage[mem=3GB] span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -q gpuv100
+#BSUB -W 1:00
+#BSUB -J prompt4long
+#BSUB -n 4
+#BSUB -o hpcoutput/prompt4long_%J.out
+#BSUB -e hpcoutput/prompt4long_%J.err
+
+
+
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
+python src/prompt.py --exp four_long
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   5.67 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     12288.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   8 sec.
+    Turnaround time :                            1778 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <hpcoutput/prompt4long_28362191.err> for stderr output of this job.
+

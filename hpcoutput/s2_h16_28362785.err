@@ -1,0 +1,6 @@
+Loaded module: cuda/11.8
+Traceback (most recent call last):
+  File "/zhome/fd/2/219569/slms/src/train.py", line 68, in <module>
+    cfg = TrainingConfig(**scenario)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TrainingConfig.__init__() got an unexpected keyword argument 's2_h32'
