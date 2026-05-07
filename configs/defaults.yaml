@@ -235,7 +235,7 @@ scenarios:
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
 
-    s2_h32:
+  s2_h32:
     OUT_DIR: "out"
     DATA_DIR: "data"
     EVAL_INTERVAL: 200
@@ -259,7 +259,7 @@ scenarios:
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
 
-    s2_h64:
+  s2_h64:
     OUT_DIR: "out"
     DATA_DIR: "data"
     EVAL_INTERVAL: 200
@@ -282,7 +282,6 @@ scenarios:
     LEARNING_RATE: 3e-4
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
-
 
   # --- SCENARIO 3: N_EMBD sweep ---
 
@@ -309,7 +308,6 @@ scenarios:
     LEARNING_RATE: 3e-4
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
-
 
   s3_e64:
     OUT_DIR: "out"
@@ -408,7 +406,6 @@ scenarios:
     LEARNING_RATE: 3e-4
     WEIGHT_DECAY: 0.1
     GRAD_CLIP: 1.0
-
 
 # Prompting scenarios — Scenario 4: output length variation, Scenario 5: temperature variation
 # All use the baseline checkpoint (baseline.pt). Baseline point for both = four_mid / five_mid.
