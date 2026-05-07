@@ -1,0 +1,72 @@
+To be, or not to be pritor me.
+
+FRIAR LAURENCE:
+Thou say to my come your part to son,
+The have in the prove words our o
+
+--- Prompting Functional Unit Report ---
+Scenario: four_mid_low
+Model: baseline.pt | Temp: 0.5 | Max tokens: 100
+Characters generated: 100
+Total Emissions: 0.001563 gCO2eq
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28384745: <prompt4mid_low> in cluster <dcc> Done
+
+Job <prompt4mid_low> was submitted from host <n-62-27-19> by user <s250379> in cluster <dcc> at Thu May  7 12:09:20 2026
+Job was executed on host(s) <4*n-62-20-11>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Thu May  7 15:11:15 2026
+</zhome/fd/2/219569> was used as the home directory.
+</zhome/fd/2/219569/slms> was used as the working directory.
+Started at Thu May  7 15:11:15 2026
+Terminated at Thu May  7 15:11:22 2026
+Results reported at Thu May  7 15:11:22 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -R "rusage[mem=1GB] span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -q gpuv100
+#BSUB -W 00:05
+#BSUB -J prompt4mid_low
+#BSUB -n 4
+#BSUB -o hpcoutput/prompt4mid_low_%J.out
+#BSUB -e hpcoutput/prompt4mid_low_%J.err
+
+
+
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
+python src/prompt.py --exp four_mid_low
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   4.36 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     4096.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   7 sec.
+    Turnaround time :                            10922 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <hpcoutput/prompt4mid_low_28384745.err> for stderr output of this job.
+

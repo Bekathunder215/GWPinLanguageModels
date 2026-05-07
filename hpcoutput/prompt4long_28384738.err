@@ -1,0 +1,5 @@
+Loaded module: cuda/11.8
+[codecarbon INFO @ 15:08:19] Codecarbon is taking the configuration from the local file /zhome/fd/2/219569/slms/.codecarbon.config
+[codecarbon INFO @ 15:08:19] offline tracker init
+[codecarbon INFO @ 15:08:19] Codecarbon is taking the configuration from the local file /zhome/fd/2/219569/slms/.codecarbon.config
+[codecarbon WARNING @ 15:08:19] Multiple instances of codecarbon are allowed to run at the same time.

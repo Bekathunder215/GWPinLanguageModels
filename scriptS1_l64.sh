@@ -2,7 +2,7 @@
 #BSUB -R "rusage[mem=3GB] span[hosts=1]"
 #BSUB -gpu "num=1:mode=exclusive_process"
 #BSUB -q gpuv100
-#BSUB -W 00:15
+#BSUB -W 00:35
 #BSUB -J s1_l64
 #BSUB -n 4
 #BSUB -o hpcoutput/s1_l64_%J.out
