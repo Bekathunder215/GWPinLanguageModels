@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 length_x = [1, 2, 3, 4, 5]
-length_y = [0.009907, float("nan"), 0.002517, 0.002740, 0.004136]
+length_y = [0.009907, 0.001563, 0.002517, 0.002740, 0.004136]
 length_labels = ["S50", "MS", "M200", "MH", "L400"]
 
 temp_x = [1, 2, 3, 4, 5]
