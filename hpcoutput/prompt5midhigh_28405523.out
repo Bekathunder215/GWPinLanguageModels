@@ -1,0 +1,78 @@
+To be, or not to be the king?
+
+GLOUCESTER:
+I made me, the come of him; and I will not bone.
+
+POLIXENES:
+Have is the can flient: my lord; mast a the hope.
+
+SICINIUS:
+As you any the well to counten'd thee;
+What is your fr
+
+--- Prompting Functional Unit Report ---
+Scenario: five_mid_high
+Model: baseline.pt | Temp: 0.75 | Max tokens: 200
+Characters generated: 200
+Total Emissions: 0.003676 gCO2eq
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28405523: <prompt5midhigh> in cluster <dcc> Done
+
+Job <prompt5midhigh> was submitted from host <n-62-9-40> by user <s250379> in cluster <dcc> at Tue May 12 13:44:45 2026
+Job was executed on host(s) <4*n-62-20-11>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue May 12 15:17:46 2026
+</zhome/fd/2/219569> was used as the home directory.
+</zhome/fd/2/219569/slms> was used as the working directory.
+Started at Tue May 12 15:17:46 2026
+Terminated at Tue May 12 15:17:55 2026
+Results reported at Tue May 12 15:17:55 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -R "rusage[mem=1GB] span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -q gpuv100
+#BSUB -W 00:05
+#BSUB -J prompt5midhigh
+#BSUB -n 4
+#BSUB -o hpcoutput/prompt5midhigh_%J.out
+#BSUB -e hpcoutput/prompt5midhigh_%J.err
+
+
+
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
+python src/prompt.py --exp five_mid_high
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   5.87 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     4096.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   9 sec.
+    Turnaround time :                            5590 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <hpcoutput/prompt5midhigh_28405523.err> for stderr output of this job.
+

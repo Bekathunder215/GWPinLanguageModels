@@ -1,0 +1,75 @@
+To be, or not to bear the the cause and blow
+The pardon the world of a for his day.
+
+SICINIUS:
+What you shall shall be me of the say.
+
+POMPEY:
+Ay, sir, why, my lord, sir, I must a world,
+I will be the bear the did the p
+
+--- Prompting Functional Unit Report ---
+Scenario: four_mid
+Model: baseline.pt | Temp: 0.5 | Max tokens: 200
+Characters generated: 200
+Total Emissions: 0.002397 gCO2eq
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 28405517: <prompt4mid> in cluster <dcc> Done
+
+Job <prompt4mid> was submitted from host <n-62-9-40> by user <s250379> in cluster <dcc> at Tue May 12 13:44:43 2026
+Job was executed on host(s) <4*n-62-20-12>, in queue <gpuv100>, as user <s250379> in cluster <dcc> at Tue May 12 15:04:30 2026
+</zhome/fd/2/219569> was used as the home directory.
+</zhome/fd/2/219569/slms> was used as the working directory.
+Started at Tue May 12 15:04:30 2026
+Terminated at Tue May 12 15:04:42 2026
+Results reported at Tue May 12 15:04:42 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -R "rusage[mem=1GB] span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -q gpuv100
+#BSUB -W 00:05
+#BSUB -J prompt4mid
+#BSUB -n 4
+#BSUB -o hpcoutput/prompt4mid_%J.out
+#BSUB -e hpcoutput/prompt4mid_%J.err
+
+
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda deactivate
+
+conda activate ~/my_env
+
+python src/prompt.py --exp four_mid
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   5.13 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     4096.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   11 sec.
+    Turnaround time :                            4799 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <hpcoutput/prompt4mid_28405517.err> for stderr output of this job.
+
